@@ -1,0 +1,46 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
+  color: var(--bs-secondary-color);
+  text-align: end;
+}
+
+.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
+  text-align: start;
+}
+
+body {
+    background-image: url('/images/game_bg.png');
+    background-repeat: no-repeat; /* Prevents the image from tiling */
+    background-size: cover; /* Makes the image cover the whole screen */
+    background-attachment: fixed; /* Keeps the background in place when you scroll */
+    background-color: #000; /* Fallback color for when the image loads */
+}
+
+/* Optional: Add a subtle overlay so your text is easy to read */
+main {
+    background-color: rgba(0, 0, 0, 0.65); /* A 65% opaque black box behind your content */
+    padding: 20px;
+    border-radius: 8px; /* Softens the corners of the content box */
+}

@@ -1,0 +1,59 @@
+﻿@model VideoGameBacklogTracker.Models.GameIndexViewModel
+
+@{
+    ViewData["Title"] = "My Backlog";
+}
+
+<h1 class="my-4 text-primary">🎮 Game Backlog Tracker</h1>
+
+<form asp-controller="Games" asp-action="Index" method="get" class="mb-4">
+    <div class="input-group shadow-sm">
+        <!-- Platform Dropdown -->
+        <select asp-for="GamePlatform" asp-items="Model.Platforms" class="form-select bg-dark text-white border-primary" style="max-width: 200px;">
+            <option value="">All Platforms</option>
+        </select>
+
+        <!-- Title Search -->
+        <input type="text" asp-for="SearchString" class="form-control bg-dark text-white border-primary" placeholder="Search by game title..." />
+
+        <button type="submit" class="btn btn-primary">Filter</button>
+        <a asp-action="Index" class="btn btn-outline-secondary">Clear</a>
+    </div>
+</form>
+
+<p><a asp-action="Create" class="btn btn-success shadow">+ Add New Game</a></p>
+
+<table class="table table-hover table-dark align-middle shadow">
+    <thead class="table-primary">
+        <tr>
+            <th>Title</th>
+            <th>Platform</th>
+            <th style="width: 30%;">Progress</th>
+            <th class="text-center">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Games!)
+        {
+            <tr>
+                <td class="fw-bold">@item.Title</td>
+                <td><span class="badge rounded-pill bg-info text-dark px-3 py-2">@item.Platform</span></td>
+                <td>
+                    <div class="progress" style="height: 25px; border-radius: 12px;">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated @(item.CompletionPercentage == 100 ? "bg-success" : "bg-warning")"
+                             style="width: @item.CompletionPercentage%;">
+                            @item.CompletionPercentage%
+                        </div>
+                    </div>
+                </td>
+                <td class="text-center">
+                    <div class="btn-group">
+                        <a asp-action="Edit" asp-route-id="@item.GameId" class="btn btn-sm btn-outline-warning">Edit</a>
+                        <a asp-action="Details" asp-route-id="@item.GameId" class="btn btn-sm btn-outline-info">Details</a>
+                        <a asp-action="Delete" asp-route-id="@item.GameId" class="btn btn-sm btn-outline-danger">Delete</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
